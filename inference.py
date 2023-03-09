@@ -138,7 +138,7 @@ class Wav2CLIPInference(object):
                                                                verbose=verbose,
                                                                **kwargs):
                 logits_audio_text = self.obtain_embeddings(audio, text_features)
-                self.score_inputs(logits_audio_text, paths_to_audio)
+                self.score_inputs(logits_audio_text, paths_to_audio, faiss_index=faiss_index)
 
 if __name__ == '__main__':
 
