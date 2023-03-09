@@ -27,7 +27,6 @@ class Wav2CLIPInference(object):
 
         audio = audio.numpy()
         audio_features = wav2clip.embed_audio(audio, self.model)
-        
         if faiss_index == True:
             return audio_features
         else:
@@ -123,7 +122,7 @@ class Wav2CLIPInference(object):
             for audio, paths_to_audio in self.preprocess_audio(audio_dir,
                                                            verbose=verbose,
                                                            **kwargs):
-                logits_audio = self.obtain_embeddings(audio, faiss_index)
+                logits_audio = self.obtain_embeddings(audio, faiss_index=faiss_index)
                 self.score_inputs(logits_audio, paths_to_audio,
                                   trained_faiss_index)
         else:
@@ -137,7 +136,7 @@ class Wav2CLIPInference(object):
             for audio, paths_to_audio in self.preprocess_audio(audio_dir,
                                                                verbose=verbose,
                                                                **kwargs):
-                logits_audio_text = self.obtain_embeddings(audio, text_features)
+                logits_audio_text = self.obtain_embeddings(audio, text_features, faiss_index)
                 self.score_inputs(logits_audio_text, paths_to_audio, faiss_index=faiss_index)
 
 if __name__ == '__main__':
