@@ -7,7 +7,7 @@ from .model.encoder import ResNetExtractor
 MODEL_URL = "https://github.com/descriptinc/lyrebird-wav2clip/releases/download/v0.1.0-alpha/Wav2CLIP.pt"
 
 
-def get_model(device="cpu", pretrained=True, frame_length=None, hop_length=None):
+def get_model(device="cuda", pretrained=True, frame_length=None, hop_length=None):
     if pretrained:
         checkpoint = torch.hub.load_state_dict_from_url(
             MODEL_URL, map_location=device, progress=True
@@ -33,6 +33,4 @@ def embed_audio(audio, model):
     return (
         model(torch.from_numpy(audio).to(next(model.parameters()).device))
         .detach()
-        .cpu()
-        .numpy()
     )

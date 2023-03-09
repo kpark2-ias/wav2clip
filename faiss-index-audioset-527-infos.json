@@ -1,0 +1,1 @@
+{"index_key": "Flat", "index_param": "", "index_path": "/home/ubuntu/wav2clip/faiss-index-audioset-527.index", "size in bytes": 1079341, "avg_search_speed_ms": 0.11889377704041046, "99p_search_speed_ms": 0.08944077997057319, "reconstruction error %": 0.0, "nb vectors": 527, "vectors dimension": 512, "compression ratio": 0.9999583078934275}
