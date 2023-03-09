@@ -4,12 +4,11 @@ import glob
 import librosa
 from tqdm import tqdm       
 from utils.extract_audio import extract_audio
-from utils.transforms import ToTensor1D
 import faiss
 import torch
-import pdb
 import os
 import clip
+import pdb
         
 
 class Wav2CLIPInference(object):
@@ -24,12 +23,12 @@ class Wav2CLIPInference(object):
             print(f'Parameter count: {parameters:.1f}M')
         
     
-    def obtain_embeddings(self, audio, text_features=None, faiss_index=False):
+    def obtain_embeddings(self, audio, text_features=None, faiss_index=True):
 
         audio = audio.numpy()
         audio_features = wav2clip.embed_audio(audio, self.model)
         
-        if faiss_index ==True:
+        if faiss_index == True:
             return audio_features
         else:
             return self.calculate_similarity(audio_features, text_features)
@@ -90,7 +89,7 @@ class Wav2CLIPInference(object):
 
         if faiss_index==True:
             k = 1
-            distances, indices = faiss_index.search(logits_audio, k)
+            distances, indices = trained_faiss_index.search(logits_audio.cpu(), k)
 
             for audio_idx in range(len(paths_to_audio)):
                 #conf_values, ids = confidence[audio_idx].topk(1)
