@@ -180,8 +180,6 @@ class Wav2CLIPFineTuning(object):
                 # Set current loss value
                 current_loss = 0.0
 
-                #progress_bar = tqdm(range(len(trainloader)))
-
                 # Iterate over the DataLoader for training data
                 for data in trainloader:
 
